@@ -1,4 +1,0 @@
-C:\Users\70dog\source\repos\TestPlugin\TestPlugin\obj\Debug\TestPlugin.csproj.AssemblyReference.cache
-C:\Users\70dog\source\repos\TestPlugin\TestPlugin\obj\Debug\Views\CategoriesView.g.cs
-C:\Users\70dog\source\repos\TestPlugin\TestPlugin\obj\Debug\TestPlugin_MarkupCompile.cache
-C:\Users\70dog\source\repos\TestPlugin\TestPlugin\obj\Debug\TestPlugin_MarkupCompile.lref
