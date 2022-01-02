@@ -18,21 +18,21 @@ namespace TestPlugin.Models
         private readonly IDocumentDataService documentDataService;
         private SortedList<string, Category> categories;
         private SortedList<string, Parameter> currentCategoryParameters;
+
         private string currentCategoryName;
-
-        //public string CurrentCategoryName
-        //{
-        //    get => currentCategoryName;
-        //    set
-        //    {
-        //        currentCategoryName = value;
-        //        NotifyPropertyChanged(CurrentCategoryName);
-        //    }
-        //}
-
         public void SetCurrentCategoryName(string categoryName)
         {
             currentCategoryName = categoryName;
+        }
+
+        public string GetCurrentCategoryParameterType(string parameterName)
+        {
+            return currentCategoryParameters[parameterName].StorageType.ToString();
+        }
+
+        public string GetCurrentCategoryParameterValue(string parameterName)
+        {
+            return currentCategoryParameters[parameterName].AsValueString();
         }
 
         public List<string> GetCategoriesNames()
@@ -45,6 +45,11 @@ namespace TestPlugin.Models
         {
             currentCategoryParameters = documentDataService.GetCategoryParameters(currentCategoryName);
             return currentCategoryParameters.Keys.ToList();
+        }
+
+        public void SetParamValueOnCurrentCategoryElements(string parameterName, string parameterValue)
+        {
+            throw new NotImplementedException();
         }
 
     }

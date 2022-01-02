@@ -1,0 +1,30 @@
+﻿<Window x:Class="TestPlugin.Views.ChangeParameterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TestPlugin.Views"
+             mc:Ignorable="d" Height="100" Width="300" Title="Смена значения параметра">
+    <Grid>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock>Имя параметра: </TextBlock>
+                <TextBlock x:Name="ParameterName" Text="{Binding SelectedParameterName}"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock>Тип параметра:</TextBlock>
+                <TextBlock x:Name="ParameterType" Text="{Binding SelectedParameterType}"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock>Значение параметра:</TextBlock>
+                <TextBox x:Name="ParameterValue" Text="{Binding SelectedParameterValue, Mode=OneTime}"></TextBox>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="80" 
+                    Command="{Binding ChangeParameterValueCommand}" 
+                    CommandParameter="{Binding ElementName=ParameterValue,Path=Text}">Принять</Button>
+            <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="80">Отмена</Button>
+        </StackPanel>
+    </Grid>
+</Window>

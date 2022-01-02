@@ -61,10 +61,14 @@
     <Compile Include="Models\DocumentDataService.cs" />
     <Compile Include="Models\IDocumentDataService.cs" />
     <Compile Include="Models\Notifier.cs" />
+    <Compile Include="Models\RelayCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CategoriesViewModel.cs" />
     <Compile Include="Views\CategoriesView.xaml.cs">
       <DependentUpon>CategoriesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChangeParameterView.xaml.cs">
+      <DependentUpon>ChangeParameterView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +76,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\CategoriesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ChangeParameterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

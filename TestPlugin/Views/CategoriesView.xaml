@@ -14,7 +14,7 @@
             <TextBlock>Список параметров в категории:</TextBlock>
             <ListBox x:Name="SelectedCategoryParams" Height="150" ScrollViewer.VerticalScrollBarVisibility="Visible"
                      ItemsSource="{Binding ParametersNames}" SelectedItem="{Binding SelectedParameterName}"></ListBox>
-            <Button x:Name="EditCategoryParam" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="80">Изменить</Button>
+            <Button  HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="80" Command="{Binding OpenChangeParameterViewCommand}">Изменить</Button>
         </StackPanel>
         <DockPanel>
             
