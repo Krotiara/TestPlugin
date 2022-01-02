@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TestPlugin.Models
 {
-    class CategoriesModel: Notifier
+    class CategoriesModel : Notifier
     {
 
         public CategoriesModel(IDocumentDataService documentDataService)
@@ -17,27 +17,34 @@ namespace TestPlugin.Models
 
         private readonly IDocumentDataService documentDataService;
         private SortedList<string, Category> categories;
+        private SortedList<string, Parameter> currentCategoryParameters;
         private string currentCategoryName;
 
-        public string CurrentCategoryName
+        //public string CurrentCategoryName
+        //{
+        //    get => currentCategoryName;
+        //    set
+        //    {
+        //        currentCategoryName = value;
+        //        NotifyPropertyChanged(CurrentCategoryName);
+        //    }
+        //}
+
+        public void SetCurrentCategoryName(string categoryName)
         {
-            get => currentCategoryName;
-            set
-            {
-                currentCategoryName = value;
-                NotifyPropertyChanged(CurrentCategoryName);
-            }
+            currentCategoryName = categoryName;
         }
 
-
-        public int CurrentCategoryId { get; private set; }
-
-        public int CurrentParameterId { get; private set; }
-
-        public SortedList<string, Category> GetCategories()
+        public List<string> GetCategoriesNames()
         {
-            categories = documentDataService.GetCategories();
-            return categories;
+            categories = documentDataService.GetCategories();         
+            return categories.Keys.ToList();
+        }
+
+        public List<string> GetCurrentCategoryParamsNames()
+        {
+            currentCategoryParameters = documentDataService.GetCategoryParameters(currentCategoryName);
+            return currentCategoryParameters.Keys.ToList();
         }
 
     }
