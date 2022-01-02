@@ -57,7 +57,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CorrectCategoriesCommand.cs" />
-    <Compile Include="Models\CategoriesHandler.cs" />
+    <Compile Include="Models\CategoriesModel.cs" />
+    <Compile Include="Models\DocumentDataService.cs" />
+    <Compile Include="Models\IDocumentDataService.cs" />
+    <Compile Include="Models\Notifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CategoriesViewModel.cs" />
     <Compile Include="Views\CategoriesView.xaml.cs">

@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TestPlugin.Models;
+using TestPlugin.ViewModels;
 
 namespace TestPlugin.Views
 {
@@ -20,9 +22,10 @@ namespace TestPlugin.Views
     /// </summary>
     public partial class CategoriesView : Window
     {
-        public CategoriesView()
+        public CategoriesView(IDocumentDataService documentDataService)
         {
             InitializeComponent();
+            DataContext = new CategoriesViewModel(documentDataService);
         }
     }
 }

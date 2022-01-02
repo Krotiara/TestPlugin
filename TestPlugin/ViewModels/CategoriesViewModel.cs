@@ -10,12 +10,18 @@ namespace TestPlugin.ViewModels
 {
     class CategoriesViewModel
     {
-        private CategoriesHandler categoriesHandler;
+        private CategoriesModel categoriesModel;
 
-        public CategoriesViewModel(Document document)
+        public List<string> CategoriesNames { get; set; }
+        public string SelectedCategoryName { get; set; } //To notify
+        
+        public CategoriesViewModel(IDocumentDataService documentDataService)
         {
-
+            categoriesModel = new CategoriesModel(documentDataService);
+            CategoriesNames = categoriesModel.GetCategories().Keys.ToList();
         }
+
+
 
 
 

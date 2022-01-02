@@ -9,7 +9,8 @@
     <Grid>
         <StackPanel>
             <TextBlock>Категории элементов в модели:</TextBlock>
-            <ListBox x:Name="Categories" Height="150" ScrollViewer.VerticalScrollBarVisibility="Visible">></ListBox>
+            <ListBox x:Name="Categories" Height="150" ScrollViewer.VerticalScrollBarVisibility="Visible" 
+                     ItemsSource="{Binding CategoriesNames}" SelectedItem="{Binding SelectedCategoryName}"></ListBox>
             <TextBlock>Список параметров в категории:</TextBlock>
             <ListBox x:Name="SelectedCategoryParams" Height="150" ScrollViewer.VerticalScrollBarVisibility="Visible"></ListBox>
             <Button x:Name="EditCategoryParam" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="80">Изменить</Button>

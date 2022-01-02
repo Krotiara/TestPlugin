@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestPlugin.Models;
+using TestPlugin.ViewModels;
+using TestPlugin.Views;
 
 namespace TestPlugin
 {
@@ -15,13 +18,14 @@ namespace TestPlugin
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
             Document document = commandData.Application.ActiveUIDocument.Document; //get active Autodesk revit project
-            //List<Element> a = new FilteredElementCollector(document).OfCategory(BuiltInCategory.OST_Walls).ToList(); //Get elements of catefory
-            //// element.Category.Id 
-            ////Returns the built -in category enum.
-            FilteredElementCollector allElementsInView = new FilteredElementCollector(document, document.ActiveView.Id);
-            List<Element> viewElements = allElementsInView.ToElements().ToList();
+            IDocumentDataService documentDataService = new DocumentDataService(document); //Обертка-обработчик над документом
+           
+            //Загрузка окна плагина
+            CategoriesView categoriesView = new CategoriesView(documentDataService);
+            categoriesView.ShowDialog();
+           
             return Result.Succeeded;
-            //throw new NotImplementedException();
+            
         }
     }
 }
