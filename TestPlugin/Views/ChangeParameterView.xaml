@@ -23,8 +23,15 @@
         <StackPanel Orientation="Horizontal">
             <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="80" 
                     Command="{Binding ChangeParameterValueCommand}" 
-                    CommandParameter="{Binding ElementName=ParameterValue,Path=Text}">Принять</Button>
-            <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="80">Отмена</Button>
+                    CommandParameter="{Binding ElementName=ParameterValue,Path=Text}"
+                    IsCancel="True"
+                    Content="Принять">
+            </Button>
+            <Button Content="Отмена" HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Width="80"
+                    IsCancel="True">
+            </Button>
         </StackPanel>
     </Grid>
 </Window>
