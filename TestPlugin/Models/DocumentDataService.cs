@@ -46,7 +46,8 @@ namespace TestPlugin.Models
             Category category = categories[categoryName];
             BuiltInCategory builtInCategory = (BuiltInCategory)category.Id.IntegerValue;
             Element element = new FilteredElementCollector(document).OfCategory(builtInCategory).First();
-            foreach(Parameter parameter in element.Parameters)
+            //foreach(Parameter parameter in element.Parameters) // 
+            foreach (Parameter parameter in element.GetOrderedParameters())
             {
                 parameters[parameter.Definition.Name] = parameter;
             }
