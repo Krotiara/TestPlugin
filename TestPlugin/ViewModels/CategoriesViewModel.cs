@@ -19,13 +19,6 @@ namespace TestPlugin.ViewModels
         }
 
 
-        public void SelectCategory()
-        {
-            categoriesModel.SetCurrentCategoryName(SelectedCategoryName);
-            ParametersNames = categoriesModel.GetCurrentCategoryParamsNames();
-        }
-
-
         #region Binding properties
         private string selectedCategoryName;
         public string SelectedCategoryName
@@ -34,12 +27,17 @@ namespace TestPlugin.ViewModels
             set
             {
                 selectedCategoryName = value;
-                SelectCategory();
                 NotifyPropertyChanged("SelectedCategoryName");
-                NotifyPropertyChanged("ParametersNames");
+                SetCategoryParams();
             }
         }
-       
+
+        public void SetCategoryParams()
+        {
+            ParametersNames = categoriesModel.LoadCategoryParams(SelectedCategoryName);
+            NotifyPropertyChanged("ParametersNames");
+        }
+
 
         private string selectedParameterName;
         public string SelectedParameterName
@@ -51,30 +49,17 @@ namespace TestPlugin.ViewModels
                 NotifyPropertyChanged("SelectedParameterName");
             }
         }
-        
-        public string SelectedParameterType => categoriesModel.GetCurrentCategoryParameterType(SelectedParameterName);
-        
-        public string SelectedParameterValue => categoriesModel.GetCurrentCategoryParameterValue(SelectedParameterName);
         #endregion
 
 
         #region commands       
-        public RelayCommand ChangeParameterValueCommand
-        {
-            get
-            {
-                return new RelayCommand(parameterValue =>
-                categoriesModel.SetParamValueOnCurrentCategoryElements(SelectedParameterName, (string)parameterValue));
-            }
-        }
-
         public RelayCommand OpenChangeParameterViewCommand
         {
             get
             {
                 return new RelayCommand(obj =>
                 {
-                    ChangeParameterView view = new ChangeParameterView(this);
+                    ChangeParameterView view = new ChangeParameterView(SelectedParameterName, SelectedCategoryName, categoriesModel);
                     view.ShowDialog();
                 });
             }

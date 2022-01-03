@@ -9,15 +9,15 @@
         <StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock>Имя параметра: </TextBlock>
-                <TextBlock x:Name="ParameterName" Text="{Binding SelectedParameterName}"></TextBlock>
+                <TextBlock x:Name="ParameterName" Text="{Binding ParameterName}"></TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock>Тип параметра:</TextBlock>
-                <TextBlock x:Name="ParameterType" Text="{Binding SelectedParameterType}"></TextBlock>
+                <TextBlock x:Name="ParameterType" Text="{Binding ParameterType}"></TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock>Значение параметра:</TextBlock>
-                <TextBox x:Name="ParameterValue" Text="{Binding SelectedParameterValue, Mode=OneTime}"></TextBox>
+                <TextBox x:Name="ParameterValue" Text="{Binding ParameterValue, Mode=OneTime}"></TextBox>
             </StackPanel>
         </StackPanel>
         <StackPanel Orientation="Horizontal">

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TestPlugin.Models;
 using TestPlugin.ViewModels;
 
 namespace TestPlugin.Views
@@ -21,10 +22,10 @@ namespace TestPlugin.Views
     /// </summary>
     public partial class ChangeParameterView : Window
     {
-        public ChangeParameterView(CategoriesViewModel categoriesViewModel)
+        public ChangeParameterView(string parameterName, string parameterCategory, CategoriesModel categoriesModel)
         {
             InitializeComponent();
-            DataContext = categoriesViewModel; //Есть сомнения в качестве такого решения в плане кода (передача CategoriesViewModel)
+            DataContext = new ParameterChangingViewModel(parameterName, parameterCategory, categoriesModel);
         }
     }
 }

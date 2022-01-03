@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TestPlugin.Models
 {
-    class CategoriesModel : Notifier
+    public class CategoriesModel : Notifier
     {
 
         public CategoriesModel(IDocumentDataService documentDataService)
@@ -16,14 +16,10 @@ namespace TestPlugin.Models
         }
 
         private readonly IDocumentDataService documentDataService;
+        
         private SortedList<string, Category> categories;
         private SortedList<string, Parameter> currentCategoryParameters;
-
-        private string currentCategoryName;
-        public void SetCurrentCategoryName(string categoryName)
-        {
-            currentCategoryName = categoryName;
-        }
+       
 
         public string GetCurrentCategoryParameterType(string parameterName)
         {
@@ -41,13 +37,19 @@ namespace TestPlugin.Models
             return categories.Keys.ToList();
         }
 
-        public List<string> GetCurrentCategoryParamsNames()
+
+        /// <summary>
+        /// Метод загружает параметры переданной категории и возвращает лист имен этих параметров.
+        /// </summary>
+        /// <param name="categoryName">Имя категории</param>
+        /// <returns></returns>
+        public List<string> LoadCategoryParams(string categoryName)
         {
-            currentCategoryParameters = documentDataService.GetCategoryParameters(currentCategoryName);
+            currentCategoryParameters = documentDataService.GetCategoryParameters(categoryName);
             return currentCategoryParameters.Keys.ToList();
         }
 
-        public void SetParamValueOnCurrentCategoryElements(string parameterName, string parameterValue)
+        public void SetParamValueOnCategoryElements(string category, string parameterName, string parameterValue)
         {
             throw new NotImplementedException();
         }
