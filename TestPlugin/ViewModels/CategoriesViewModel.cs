@@ -12,10 +12,11 @@ namespace TestPlugin.ViewModels
 
         public List<string> ParametersNames { get; set; }
 
+
         public CategoriesViewModel(IDocumentDataService documentDataService)
         {
             categoriesModel = new CategoriesModel(documentDataService);
-            CategoriesNames = categoriesModel.GetCategoriesNames();
+            CategoriesNames = categoriesModel.LoadCategories();
         }
 
 

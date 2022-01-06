@@ -4,26 +4,28 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:TestPlugin.Views"
-             mc:Ignorable="d" Height="400" Width="300" Title="Тестовый плагин"
+             mc:Ignorable="d" Height="420" Width="300" Title="Тестовый плагин"
              WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
-        <StackPanel>
-            <TextBlock>Категории элементов в модели:</TextBlock>
-            <ListBox x:Name="Categories" Height="150" ScrollViewer.VerticalScrollBarVisibility="Visible" 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" ></RowDefinition>
+            <RowDefinition Height="150"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="150"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0">Категории элементов в модели:</TextBlock>
+        <ListBox Grid.Row="1"  x:Name="Categories" Height="150" ScrollViewer.VerticalScrollBarVisibility="Visible" 
                      ItemsSource="{Binding CategoriesNames}" SelectedItem="{Binding SelectedCategoryName}"></ListBox>
-            <TextBlock>Список параметров в категории:</TextBlock>
-            <ListBox x:Name="SelectedCategoryParams" Height="150" ScrollViewer.VerticalScrollBarVisibility="Visible"
+        <TextBlock Grid.Row="2">Список параметров в категории:</TextBlock>
+        <ListBox Grid.Row="3" x:Name="SelectedCategoryParams" Height="150" ScrollViewer.VerticalScrollBarVisibility="Visible"
                      ItemsSource="{Binding ParametersNames}" SelectedItem="{Binding SelectedParameterName}"></ListBox>
-            <Button  HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="80" Command="{Binding OpenChangeParameterViewCommand}">Изменить</Button>
-        </StackPanel>
-        <DockPanel>
-            
-        </DockPanel>
-        <Button Content="Закрыть" x:Name="Close" HorizontalAlignment="Right"
+        <Button Grid.Row="4"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="80" Command="{Binding OpenChangeParameterViewCommand}">Изменить</Button>
+        <Button Grid.Row="5" Content="Закрыть" x:Name="Close" HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
                 Width="80"
                 IsCancel="True">
         </Button>
-        
     </Grid>
 </Window>

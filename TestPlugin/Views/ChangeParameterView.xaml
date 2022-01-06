@@ -4,34 +4,36 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TestPlugin.Views"
-             mc:Ignorable="d" Height="100" Width="300" Title="Смена значения параметра">
-    <Grid>
-        <StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock>Имя параметра: </TextBlock>
-                <TextBlock x:Name="ParameterName" Text="{Binding ParameterName}"></TextBlock>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock>Тип параметра:</TextBlock>
-                <TextBlock x:Name="ParameterType" Text="{Binding ParameterType}"></TextBlock>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock>Значение параметра:</TextBlock>
-                <TextBox x:Name="ParameterValue" Text="{Binding ParameterValue, Mode=OneTime}"></TextBox>
-            </StackPanel>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="80" 
+             mc:Ignorable="d" Height="100" Width="400"\
+             ResizeMode="NoResize"
+             WindowStartupLocation="CenterScreen">
+    <Grid HorizontalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" ></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0">Тип параметра:</TextBlock>
+        <TextBlock x:Name="ParameterType" Text="{Binding ParameterType}" Grid.Row="0" Grid.Column="1"></TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="0">Значение параметра:</TextBlock>
+        <TextBox x:Name="ParameterValue" Text="{Binding ParameterValue, Mode=OneTime}" Grid.Row="1" Grid.Column="1" ></TextBox>
+        <StackPanel  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
+        <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="80" 
                     Command="{Binding ChangeParameterValueCommand}" 
                     CommandParameter="{Binding ElementName=ParameterValue,Path=Text}"
                     IsCancel="True"
-                    Content="Принять">
-            </Button>
-            <Button Content="Отмена" HorizontalAlignment="Right"
+                    Content="Принять"
+                >
+        </Button>
+        <Button Content="Отмена" HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
                     Width="80"
                     IsCancel="True">
-            </Button>
+        </Button>
         </StackPanel>
     </Grid>
 </Window>

@@ -9,8 +9,10 @@ namespace TestPlugin.Models
 {
     public interface IDocumentDataService
     {
-        SortedList<string, Category> GetCategories();
+        Document Document { get; }
 
-        SortedList<string, Parameter> GetCategoryParameters(string categoryName);
+        SortedList<int, Category> GetCategories();
+
+        SortedList<string, Parameter> GetCategoryParameters(int categoryId);
     }
 }
