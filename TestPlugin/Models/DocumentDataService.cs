@@ -9,28 +9,24 @@ namespace TestPlugin.Models
 {
     public class DocumentDataService : IDocumentDataService
     {
-        private readonly Document document;
-        private readonly List<Element> documentElements;
+        private readonly FilteredElementCollector activeViewElementsCollector;
         private readonly SortedList<string, Category> categories;
 
         public DocumentDataService(Document document)
         {
-            this.document = document;
-            documentElements = new FilteredElementCollector(document, document.ActiveView.Id)
-                .ToElements()
-                .ToList();
+            activeViewElementsCollector = new FilteredElementCollector(document, document.ActiveView.Id);
             categories = GetCategories();
         }
 
         public SortedList<string, Category> GetCategories()
         {
             SortedList<string, Category> categories = new SortedList<string, Category>();
-            foreach(Element element in documentElements)
+            foreach(Element element in activeViewElementsCollector)
             {
                 Category category = element.Category;
                 if (category == null) continue; //TODO 02.01.2022 Разобраться почему выскакивают с null
+                // Выбираем только категории элементов модели модели
                 if (category.CategoryType == CategoryType.Model && !categories.ContainsKey(category.Name))
-                // Выбираем только категории модели ( TODO - Это то же самое, что только те, которые имеют представление в 3д модели?)
                 {
                     categories[category.Name] = category;
                 }
@@ -42,16 +38,17 @@ namespace TestPlugin.Models
         {
             if (!categories.ContainsKey(categoryName))
                 return null;
+
             SortedList<string, Parameter> parameters = new SortedList<string, Parameter>();
             Category category = categories[categoryName];
             BuiltInCategory builtInCategory = (BuiltInCategory)category.Id.IntegerValue;
-            Element element = new FilteredElementCollector(document).OfCategory(builtInCategory).First();
-            //foreach(Parameter parameter in element.Parameters) // 
-            foreach (Parameter parameter in element.GetOrderedParameters())
-            {
-                parameters[parameter.Definition.Name] = parameter;
-            }
-            return parameters;     
+ 
+            //заполнение имен всех параметров элементов выбранной категории
+            foreach (Element e in activeViewElementsCollector.OfCategory(builtInCategory))
+                foreach (Parameter parameter in e.Parameters)
+                    if (!parameters.ContainsKey(parameter.Definition.Name))
+                        parameters[parameter.Definition.Name] = parameter;
+            return parameters;
         }
     }
 }
