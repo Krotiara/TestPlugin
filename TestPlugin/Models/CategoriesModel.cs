@@ -23,9 +23,9 @@ namespace TestPlugin.Models
 
 
 
-        public string GetCurrentCategoryParameterType(string parameterName)
+        public StorageType GetCurrentCategoryParameterType(string parameterName)
         {
-            return currentCategoryParameters[parameterName].StorageType.ToString();
+            return currentCategoryParameters[parameterName].StorageType;
         }
 
 

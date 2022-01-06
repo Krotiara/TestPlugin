@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TestPlugin.Views"
-             mc:Ignorable="d" Height="100" Width="400"\
+             mc:Ignorable="d" Height="100" Width="400"
              ResizeMode="NoResize"
              WindowStartupLocation="CenterScreen">
     <Grid HorizontalAlignment="Stretch">
@@ -26,8 +26,7 @@
                     Command="{Binding ChangeParameterValueCommand}" 
                     CommandParameter="{Binding ElementName=ParameterValue,Path=Text}"
                     IsCancel="True"
-                    Content="Принять"
-                >
+                    Content="Принять">
         </Button>
         <Button Content="Отмена" HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
