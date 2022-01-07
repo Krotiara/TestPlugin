@@ -59,6 +59,7 @@ namespace TestPlugin.Models
             return currentCategoryParameters.Keys.ToList();
         }
 
+
         /// <summary>
         /// Метод устанавливает значение parameterValue  параметра с именем parameterName для всех элементов категории с именем categoryName.
         /// </summary>
@@ -124,9 +125,6 @@ namespace TestPlugin.Models
                     break;
             }
             return isSuccess;
-        }
-
-
-       
+        }     
     }
 }

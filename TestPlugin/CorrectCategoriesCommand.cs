@@ -18,13 +18,17 @@ namespace TestPlugin
         {
             Document document = commandData.Application.ActiveUIDocument.Document; //get active Autodesk revit project
             IDocumentDataService documentDataService = new DocumentDataService(document); //Обертка-обработчик над документом
-           
-            //Загрузка окна плагина
-            CategoriesView categoriesView = new CategoriesView(documentDataService);
-            categoriesView.ShowDialog();
-           
+            try
+            {
+                //Загрузка окна плагина
+                CategoriesView categoriesView = new CategoriesView(documentDataService);
+                categoriesView.ShowDialog();
+            }
+            catch(Exception e)
+            {
+                return Result.Failed;
+            }
             return Result.Succeeded;
-            
         }
     }
 }
