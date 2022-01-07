@@ -6,15 +6,6 @@ namespace TestPlugin.ViewModels
 {
     public class ParameterChangingViewModel
     {
-        public string ParameterName { get; set; }
-
-        public string ParameterCategoryName { get; set; }
-        public string ParameterType { get; set; }
-        private StorageType storageParameterType;
-        public string ParameterValue { get; set; }
-
-        private CategoriesModel categoriesModel;
-
         public ParameterChangingViewModel(string parameterName, string parameterCategoryName, CategoriesModel categoriesModel)
         {
             this.categoriesModel = categoriesModel;
@@ -22,9 +13,24 @@ namespace TestPlugin.ViewModels
             ParameterCategoryName = parameterCategoryName;
             storageParameterType = categoriesModel.GetCurrentCategoryParameterType(parameterName);
             ParameterType = storageParameterType.ToString();
-            ParameterValue = categoriesModel.GetCurrentCategoryParameterValue(parameterName);
+            //ParameterValue = categoriesModel.GetCurrentCategoryParameterValue(parameterName);
         }
 
+        private readonly CategoriesModel categoriesModel;
+
+
+        #region Binding properties
+        public string ParameterName { get; set; }
+
+        public string ParameterCategoryName { get; set; }
+        public string ParameterType { get; set; }
+        private StorageType storageParameterType;
+        public string ParameterValue { get; set; }
+
+        #endregion
+
+
+        #region Commands   
         public RelayCommand ChangeParameterValueCommand
         {
             get
@@ -45,9 +51,9 @@ namespace TestPlugin.ViewModels
                         double.Parse(parameterValue);
                         break;
                     case StorageType.Integer:
-                    case StorageType.ElementId:
+                    case StorageType.ElementId:  //Пока не придумал, как проверить ElementId
                         int.Parse(parameterValue);
-                        break;
+                        break;  
                     case StorageType.None:
                         return false;
                     case StorageType.String:
@@ -60,5 +66,6 @@ namespace TestPlugin.ViewModels
             }
             return true;
         }
+        #endregion
     }
 }

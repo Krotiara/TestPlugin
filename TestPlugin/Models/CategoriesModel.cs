@@ -19,32 +19,31 @@ namespace TestPlugin.Models
         
         private SortedList<int, Category> categories;
         private SortedList<string, Parameter> currentCategoryParameters;
-        private Dictionary<string, Category> categoriesNamesDict;
+        private SortedDictionary<string, Category> categoriesNamesDict;
 
 
-
-        public StorageType GetCurrentCategoryParameterType(string parameterName)
-        {
-            return currentCategoryParameters[parameterName].StorageType;
-        }
+        public StorageType GetCurrentCategoryParameterType(string parameterName) => currentCategoryParameters[parameterName].StorageType;
 
 
-        public string GetCurrentCategoryParameterValue(string parameterName)
-        {
-            return currentCategoryParameters[parameterName].AsValueString();
-        }
+        public string GetCurrentCategoryParameterValue(string parameterName) => currentCategoryParameters[parameterName].AsValueString();
+
+
+        private Category GetCategoryByName(string categoryName) => categoriesNamesDict[categoryName];
+
+
+        private Parameter GetParameterByName(string parameterName) => currentCategoryParameters[parameterName];
 
 
         /// <summary>
-        /// Метод загружает категории и возвращает список имет этих категорий.
+        /// Метод загружает категории и возвращает список имен этих категорий.
         /// </summary>
         public List<string> LoadCategories()
         {
             categories = documentDataService.GetCategories();
-            categoriesNamesDict = new Dictionary<string, Category>();
+            categoriesNamesDict = new SortedDictionary<string, Category>();
             foreach (Category category in categories.Values)
                 categoriesNamesDict[category.Name] = category;
-            return categories.Values.Select(x => x.Name).ToList();
+            return categoriesNamesDict.Keys.ToList();
         }
 
 
@@ -77,35 +76,57 @@ namespace TestPlugin.Models
             using (Transaction transaction = new Transaction(documentDataService.Document, "Change category parameters"))
             {
                 transaction.Start();
-                try
+                bool isSettingSuccess = false;
+                foreach (Element element in activeCategoryElements)
                 {
-                    foreach (Element element in activeCategoryElements)
+                    try
                     {
                         Parameter parameter = element.get_Parameter(settingParameterDefinition);
-                        bool isSuccess = parameter.SetValueString(parameterValue);
+                        isSettingSuccess = SetParameterValue(parameter, parameterValue);
+                        if (!isSettingSuccess)
+                        {
+                            //Сюда логично добавить log.
+                        }
                     }
-                }
-                catch(Exception e)
-                {
-                    transaction.RollBack();
-                    throw; //Обработка ошибок todo
+                    catch (Exception e)
+                    {
+                        // Сюда логично добавить log. Пока оставлена просто заглужка на пропуск ошибки.
+                        continue;
+                    }
                 }
                 transaction.Commit();
             }
         }
 
-        private Category GetCategoryByName(string categoryName)
+
+        private bool SetParameterValue(Parameter parameter, string valueString)
         {
-            //Add validation todo
-            return categoriesNamesDict[categoryName];
+            bool isSuccess = true;
+            StorageType storageType = parameter.StorageType;
+            switch(storageType)
+            {
+                // SetValueString не хочет устанавливать yesno parameter type и strings, поэтому через Set.
+                case StorageType.Integer:
+                    isSuccess = parameter.Set(int.Parse(valueString));
+                    break;
+                case StorageType.ElementId:
+                    int id = int.Parse(valueString);
+                    isSuccess = parameter.Set(new ElementId(id));
+                    break;
+                case StorageType.String:
+                    isSuccess = parameter.Set(valueString);
+                    break;
+                case StorageType.Double:
+                    isSuccess = parameter.Set(double.Parse(valueString));
+                    break;
+                default:
+                    isSuccess = false;
+                    break;
+            }
+            return isSuccess;
         }
 
 
-        private Parameter GetParameterByName(string parameterName)
-        {
-            //Add validation todo
-            return currentCategoryParameters[parameterName];
-        }
-
+       
     }
 }
