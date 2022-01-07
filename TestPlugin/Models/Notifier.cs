@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace TestPlugin.Models
 {
     /// <summary>
-    /// Класс-уведомитель об изменениях. При наследовании от него добавляет поддержку интерфейса INotifyPropertyChanged без необходимости явной реализации
+    /// Класс-уведомитель об изменениях. При наследовании от него добавляет поддержку интерфейса INotifyPropertyChanged без необходимости явной реализации.
     /// </summary>
     public class Notifier : INotifyPropertyChanged
     {

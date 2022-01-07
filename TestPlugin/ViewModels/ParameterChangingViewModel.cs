@@ -31,6 +31,10 @@ namespace TestPlugin.ViewModels
 
 
         #region Commands   
+        /// <summary>
+        /// Команда изменения значения выбранного параметра выбранной категории.
+        /// 
+        /// </summary>
         public RelayCommand ChangeParameterValueCommand
         {
             get

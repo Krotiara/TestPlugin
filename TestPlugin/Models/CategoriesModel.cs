@@ -92,7 +92,11 @@ namespace TestPlugin.Models
                     catch (Exception e)
                     {
                         // Сюда логично добавить log. Пока оставлена просто заглужка на пропуск ошибки.
-                        continue;
+                        //NullReferenceException ~ элемент данной категории не имеет параметра parameterName.
+                        //InvalidOperationException ~ ошибка в смене значения параметра.
+                        if (e is NullReferenceException || e is Autodesk.Revit.Exceptions.InvalidOperationException)
+                            continue;
+                        throw;  
                     }
                 }
                 transaction.Commit();
